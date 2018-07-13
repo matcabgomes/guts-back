@@ -1,6 +1,7 @@
-var Promise         = require('promise');
-var logger          = require('../config/logger');
-var mail            = require('nodemailer');
+const Promise         = require('promise');
+const logger          = require('../config/logger');
+const mail            = require('nodemailer');
+const fromMail            = require('../config/secret')
 
 module.exports = function(dependencies) {
 
@@ -8,9 +9,11 @@ module.exports = function(dependencies) {
 
         sendMail: function(subjectText, bodyText, to){
             return new Promise(function(resolve, reject) {
+                console.log(fromMail.email)
+                console.log(fromMail.password)
                 var ownMail = {
-                    user: "sammy.sysmap@gmail.com",
-                    pass: "Hack.321"
+                    user: fromMail.email,
+                    pass: fromMail.password
                 }
 
                 var transporter = mail.createTransport({
